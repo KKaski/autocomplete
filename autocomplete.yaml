@@ -1,0 +1,41 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: autocomplete
+  labels:
+    purpose: demonstrate-autocomplete
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: autocomplete
+  template:
+    metadata:
+      labels:
+        app: autocomplete
+    spec:
+      containers:
+      - name: autocomplete-container
+        image: gcr.io/autocomplete-16112017/autocompleate
+        env:
+        - name: REDIS_HOST
+          value: "redis-autocomplete-redis/6379"
+        - name: REDIS_USER
+          value: ""
+        - name: REDIS_PWD
+          value: "NGuijbLNAi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autocomplete-svc
+spec:
+  selector:
+    app: autocomplete
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+  
+  

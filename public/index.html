@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>autocomplete demo</title>
+    <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+    <script src="/javascripts/jquery-3.2.1.min.js"></script>
+    <script src="/javascripts/jquery-ui.min.js"></script>
+</head>
+
+<body>
+
+    <div style="width:80%">
+        <h2>Select Product</h2>
+        <input id="autocomplete" style="width:70%; margin:0 ;">
+    </div>
+
+    <script>
+        $("#autocomplete").keyup(function() {
+        $("#autocomplete").autocomplete({ source: [] });
+        
+        //Read the autocomplete if more than two characters is typed
+        var value = document.getElementById("autocomplete").value;
+        if(value.length>=2) {
+            $.post("/api",{ query: value}).done(function (data) {
+                // Assuming data returns as an array, if not - convert it to one.
+                $("#autocomplete").autocomplete({
+                    source: data
+                });
+            })
+        }
+    })
+    </script>
+
+</body>
+
+</html>
