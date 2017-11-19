@@ -23,7 +23,7 @@
         //Read the autocomplete if more than two characters is typed
         var value = document.getElementById("autocomplete").value;
         if(value.length>=2) {
-            $.post("/api",{ query: value}).done(function (data) {
+            $.getJSON("/api",{ query: value}).done(function (data) {
                 // Assuming data returns as an array, if not - convert it to one.
                 $("#autocomplete").autocomplete({
                     source: data

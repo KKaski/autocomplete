@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
       - name: autocomplete-container
-        image: gcr.io/autocomplete-16112017/autocompleate
+        image: gcr.io/autocomplete-16112017/autocomplete:3
         env:
         - name: REDIS_HOST
           value: "redis-autocomplete-redis/6379"
         - name: REDIS_USER
           value: ""
         - name: REDIS_PWD
-          value: "NGuijbLNAi"
+          value: "jnEIT6gNYl"
 ---
 apiVersion: v1
 kind: Service

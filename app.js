@@ -6,8 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var redis_ac = require('./lib/redis_autocomplete.js');
 
-
 var app = express();
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /publicapp.use(logger('dev'));
 app.use(bodyParser.json());
@@ -19,15 +21,17 @@ console.log("Listening port: "+process.env.PORT);
 redis_ac.load("./products.json");
 
 // query the data set 
-app.post("/api", function(req,res) {
-    console.log("Query:"+req.body.query);
-    redis_ac.query(req.body.query, function(err, data) {
+app.get("/api", function(req,res) {
+    console.log("Query:"+req.query.query);
+    redis_ac.query(req.query.query, function(err, data) {
     if (err) {
       console.log("Error:"+err);
       return res.send([]);
     } 
     console.log("Result:"+data);
-    res.send(data);
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "public, max-age=100");
+    res.json(data);
   }); 
 });
 
