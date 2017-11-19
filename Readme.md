@@ -21,7 +21,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/Users/
 Failed => needed to disable the store docker password to mac keychain
 
 ### Tag and push the image
-docker tag kimmo/autocomplete gcr.io/autocomplete-16112017/autocomplete:1 
+docker tag kimmo/autocomplete gcr.io/autocomplete-16112017/autocomplete:3 
 /Users/kimmok/Downloads/google-cloud-sdk/bin/gcloud docker -- push gcr.io/autocomplete-16112017/autocomplete
 /Users/kimmok/Downloads/google-cloud-sdk/bin/gcloud docker -- tag gcr.io/autocomplete-16112017/autocomplete:2 gcr.io/autocomplete-16112017/autocomplete:latest
 
