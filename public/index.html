@@ -12,6 +12,9 @@
 
 <body>
 
+    <div>
+        <input type="checkbox" id="elastic" value="Elastic">Use Elasicsearch<br>
+    </div>
     <div id="namer">
         <div id="namer-input">
             <input name="namername" id="autocomplete" placeholder="Type Product">
@@ -24,8 +27,9 @@
         
         //Read the autocomplete if more than two characters is typed
         var value = document.getElementById("autocomplete").value;
+        var elastic = document.getElementById("elastic").checked;
         if(value.length>=2) {
-            $.getJSON("/api",{ query: value}).done(function (data) {
+            $.getJSON("/api",{ query: value,elastic:elastic}).done(function (data) {
                 // Assuming data returns as an array, if not - convert it to one.
                 $("#autocomplete").autocomplete({
                     source: data

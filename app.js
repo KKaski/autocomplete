@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var redis_ac = require('./lib/redis_autocomplete.js');
+var elastic_ac = require('./lib/elastic_autocomplete.js');
 const md5File = require('md5-file');
 
 //Autocomplete control information
@@ -26,19 +27,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log("Listening port: "+process.env.PORT);
 etag = md5File.sync(pf);
 redis_ac.load(pf);
+elastic_ac.load(pf);
 
 // query the data set 
 app.get("/api", function(req,res) {
-    console.log("Query:"+req.query.query);
-    redis_ac.query(req.query.query, function(err, data) {
+  
+    var qe = redis_ac;
+    var query = req.query.query;
+    var elastic = req.query.elastic;
+    if(elastic=="true")
+    {
+      qe=elastic_ac;
+    }
+    console.log("Query:"+query);
+    console.log("Elastic:"+elastic);
+    qe.query(query, function(err, data) {
     if (err) {
       console.log("Error:"+err);
       return res.send([]);
     } 
     console.log("Result:"+data);
     res.setHeader("Content-Type", "application/json");
-    res.setHeader("Cache-Control", "public, max-age=100");
-    res.setHeader("ETag", etag);
+    //res.setHeader("Cache-Control", "public, max-age=100");
+    //res.setHeader("ETag", etag);
     res.json(data);
   }); 
 });
@@ -48,7 +59,8 @@ app.get("/load", function(req,res) {
       console.log(req.query);
       etag = md5File.sync(pf);
       console.log(`The MD5 sum of LICENSE.md is: ${etag}`);
-      redis_ac.load("products.json");
+      redis_ac.load(pf);
+      elastic_ac.load(pf);
       return res.send("Loading initiated");   
 });
 

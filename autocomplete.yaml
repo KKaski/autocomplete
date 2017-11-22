@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: autocomplete-container
-        image: gcr.io/autocomplete-16112017/autocomplete:3
+        image: gcr.io/autocomplete-16112017/autocomplete:4
         env:
         - name: REDIS_HOST
           value: "redis-autocomplete-redis/6379"
