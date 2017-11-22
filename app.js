@@ -39,8 +39,7 @@ app.get("/api", function(req,res) {
     {
       qe=elastic_ac;
     }
-    console.log("Query:"+query);
-    console.log("Elastic:"+elastic);
+  
     qe.query(query, function(err, data) {
     if (err) {
       console.log("Error:"+err);

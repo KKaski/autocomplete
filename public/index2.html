@@ -4,25 +4,23 @@
 <head>
     <meta charset="utf-8">
     <title>autocomplete demo</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+    <link rel="stylesheet" href="/stylesheets/style2.css">
     <script src="/javascripts/jquery-3.2.1.min.js"></script>
     <script src="/javascripts/jquery-ui.min.js"></script>
 </head>
 
 <body>
-
-    <div>
-        <input type="button" id="theme" value="Theme"><br>
-        <input type="checkbox" id="elastic" value="Elastic">Elasicsearch<br>
-    </div>
-
-    <div id="namer">
-        <div id="namer-input">
-            <input name="namername" id="autocomplete" placeholder="Type Product">
+             
+    <a href="index.html" id="Theme">Light</a><br>   
+    <input type="checkbox" id="elastic" value="Elastic">Elasicsearch<br>
+    
+    <div class="centered">
+            <div class="group">
+            <input class="autocomplete" name="namername" id="autocomplete" placeholder="Type Product">
         </div>
-    </div>
-
+    </div>    
+   
     <script>
         $("#autocomplete").keyup(function() {
         $("#autocomplete").autocomplete({ source: [] });
@@ -39,18 +37,6 @@
             })
         }
     })
-    </script>
-
-    <script>
-    var count=0;
-    $("#theme").click(function() {
-        if(count%2==0)
-            $("link[rel=stylesheet]").attr({href : "/stylesheets/style2.css"});
-        else
-            $("link[rel=stylesheet]").attr({href : "/stylesheets/style.css"});
-        
-        count++;
-    });
     </script>
 
 </body>

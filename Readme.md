@@ -57,7 +57,6 @@ kubectl get svc
 
 Take the public IP adress from the service description and test with the browser
 
-
 ## Update
 kubectl replace -f autocomplete.yaml --record
 
@@ -67,4 +66,6 @@ kubectl get replicaset
 kubectl delete replicaset xxx
 kubectl get pods
 
+## Layouts
+This has now two layouts index.html and index2.html
 
